@@ -1,22 +1,22 @@
 // To parse this JSON data, do
 //
-//     final clarfieUploadModel = clarfieUploadModelFromJson(jsonString);
+//     final clarfieBase64Model = clarfieBase64ModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ClarfieUploadModel clarfieUploadModelFromJson(String str) => ClarfieUploadModel.fromJson(json.decode(str));
+ClarfieBase64Model clarfieBase64ModelFromJson(String str) => ClarfieBase64Model.fromJson(json.decode(str));
 
-String clarfieUploadModelToJson(ClarfieUploadModel data) => json.encode(data.toJson());
+String clarfieBase64ModelToJson(ClarfieBase64Model data) => json.encode(data.toJson());
 
-class ClarfieUploadModel {
-  ClarfieUploadModel({
+class ClarfieBase64Model {
+  ClarfieBase64Model({
     this.inputs,
   });
 
-  List<Input> inputs;
+  List<Input1> inputs;
 
-  factory ClarfieUploadModel.fromJson(Map<String, dynamic> json) => ClarfieUploadModel(
-    inputs: List<Input>.from(json["inputs"].map((x) => Input.fromJson(x))),
+  factory ClarfieBase64Model.fromJson(Map<String, dynamic> json) => ClarfieBase64Model(
+    inputs: List<Input1>.from(json["inputs"].map((x) => Input1.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -24,14 +24,14 @@ class ClarfieUploadModel {
   };
 }
 
-class Input {
-  Input({
+class Input1 {
+  Input1({
     this.data,
   });
 
   Data data;
 
-  factory Input.fromJson(Map<String, dynamic> json) => Input(
+  factory Input1.fromJson(Map<String, dynamic> json) => Input1(
     data: Data.fromJson(json["data"]),
   );
 
@@ -45,10 +45,10 @@ class Data {
     this.image,
   });
 
-  Image image;
+  Image1 image;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    image: Image.fromJson(json["image"]),
+    image: Image1.fromJson(json["image"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -56,14 +56,14 @@ class Data {
   };
 }
 
-class Image {
-  Image({
+class Image1 {
+  Image1({
     this.base64,
   });
 
   String base64;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory Image1.fromJson(Map<String, dynamic> json) => Image1(
     base64: json["base64"],
   );
 
