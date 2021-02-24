@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../Firebasedemopack/FirebaseDemo.dart';
 
 class Home extends StatefulWidget {
+ static const classname="/Home";
   @override
   _HomeState createState() => _HomeState();
 }
@@ -56,7 +57,7 @@ class _HomeState extends State<Home> {
              return   Container(child: Center(child: CircularProgressIndicator(),),);
               }else{
                 return SingleChildScrollView(
-                  controller: value.controller,
+                  controller: value.scrollcontrollerhome,
                   child: Column(
                     children: value.listofProducts,
                   ),

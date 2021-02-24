@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Screens/Home/HomeScreen.dart';
 
 class SignUpProvider extends ChangeNotifier {
   var firestoreInstance = FirebaseFirestore.instance;
@@ -65,7 +66,7 @@ class SignUpProvider extends ChangeNotifier {
       value.docs.forEach((result) {
         print(result.data());
         print(result.get("email"));
-        if (result.exists == true) {
+        if (result.get("email").toString().isNotEmpty ) {
           isuserExist = true;
         }
       });
@@ -86,7 +87,7 @@ class SignUpProvider extends ChangeNotifier {
       }).then((value) {
         scaffoldkey.currentState
             .showSnackBar(new SnackBar(content: Text("Sign Up Completed")));
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, Home.classname);
       });
     }
 

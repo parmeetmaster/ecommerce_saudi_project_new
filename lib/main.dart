@@ -22,9 +22,12 @@ import 'Screens/SignUp/signup.dart';
 import 'Screens/home1/home1.dart';
 import 'Screens/home2/home2.dart';
 import 'Screens/profile/ProfilePage.dart';
+import 'utils/preference.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Preference.load();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (ctx) => HomeProvider()),
@@ -49,10 +52,10 @@ class MyApp extends StatelessWidget {
     getData();
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute:  SignInPage.classname,
+      initialRoute:  SignUpScreen.classname,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => Home(),
+        Home.classname: (context) => Home(),
         AnalysisImageScreen.classname:(context)=>AnalysisImageScreen(),
         ProfilePage.classname:(context)=>ProfilePage(),
         SignInPage.classname:(context)=>SignInPage(),

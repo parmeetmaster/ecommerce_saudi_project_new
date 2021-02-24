@@ -17,7 +17,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class HomeProvider extends ChangeNotifier {
-  ScrollController controller = new ScrollController();
+  ScrollController scrollcontrollerhome = new ScrollController();
   List<Widget> listofProducts = [];
   bool isinitloaded = false;
   int pageno = 1;
@@ -101,7 +101,7 @@ class HomeProvider extends ChangeNotifier {
 
   onEndScroll(ScrollMetrics metrics) {
     print("Scroll end");
-    if (controller.position.pixels == controller.position.maxScrollExtent) {
+    if (scrollcontrollerhome.position.pixels == scrollcontrollerhome.position.maxScrollExtent) {
       print("Scroll completed");
       addMore();
     }
