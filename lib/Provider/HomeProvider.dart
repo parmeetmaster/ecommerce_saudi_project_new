@@ -3,14 +3,18 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Provider/AnalysisProvider.dart';
+import 'package:flutter_app_demo_saudi/Screens/AnalysisImageScreen/AnalysisDetailScreen.dart';
 import 'package:flutter_app_demo_saudi/api/clarfieApiService.dart';
 import 'package:flutter_app_demo_saudi/api/rapidApiService.dart';
+import 'package:flutter_app_demo_saudi/model/AnalysisDataHolder.dart';
 import 'package:flutter_app_demo_saudi/model/ClarfiePhotoResponse.dart';
 import 'package:flutter_app_demo_saudi/model/ClarfieUploadModel.dart';
 import 'package:flutter_app_demo_saudi/model/product_model.dart';
 import 'package:flutter_app_demo_saudi/widgets/IndicatorItem.dart';
 import 'package:flutter_app_demo_saudi/widgets/ProductItem.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class HomeProvider extends ChangeNotifier {
   ScrollController controller = new ScrollController();
@@ -88,6 +92,7 @@ class HomeProvider extends ChangeNotifier {
 
   onStartScroll(ScrollMetrics metrics) {
     print("Scroll Start");
+
   }
 
   onUpdateScroll(ScrollMetrics metrics) {
@@ -123,7 +128,10 @@ class HomeProvider extends ChangeNotifier {
   }
 
   analysisImageUsingBase64() async {
-    List<int> imageBytes = _image.readAsBytesSync();
+
+    Navigator.pushNamed(context, AnalysisImageScreen.classname,arguments: AnalysisDataHolder(image: _image));
+
+ /*   List<int> imageBytes = _image.readAsBytesSync();
     print(imageBytes);
     String base64Image = base64Encode(imageBytes);
     ClarfieBase64Model obj = ClarfieBase64Model(
@@ -144,7 +152,7 @@ class HomeProvider extends ChangeNotifier {
           .concepts[0]
           .name;
       print("products is ${str}");
-    }
+    }*/
   }
 
   AnalysisImageUsingUrl() async {

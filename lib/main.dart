@@ -4,10 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_demo_saudi/Provider/FirebaseDemoProvider.dart';
 import 'package:flutter_app_demo_saudi/Provider/ImagePickerProvider.dart';
+import 'package:flutter_app_demo_saudi/Screens/AnalysisImageScreen/AnalysisDetailScreen.dart';
 import 'package:flutter_app_demo_saudi/Screens/DetailScreen/DetailScreen.dart';
 import 'package:flutter_app_demo_saudi/Screens/Firebasedemopack/FirebaseDemo.dart';
 import 'package:provider/provider.dart';
 
+import 'Provider/AnalysisProvider.dart';
 import 'Provider/DetailsScreenProvider.dart';
 import 'Provider/HomeProvider.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -23,6 +25,7 @@ void main() async {
     ChangeNotifierProvider(create: (ctx) => FirebaseDemoProvider()),
     ChangeNotifierProvider(create: (ctx) => ImagePickerProvider()),
     ChangeNotifierProvider(create: (ctx) => DetailScreenProvider()),
+    ChangeNotifierProvider(create: (ctx) => AnalysisScreenProvider()),
 
   ],
       child:MyApp()
@@ -42,7 +45,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => Home(),
-        DetailScreen.screename:(context)=>DetailScreen(),
+        AnalysisImageScreen.classname:(context)=>AnalysisImageScreen(),
+       DetailScreen.screename:(context)=>DetailScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         FirebaseDemo.classname:(context)=>FirebaseDemo(),
         ImagePickerScreen.classname:(context)=>ImagePickerScreen(),
