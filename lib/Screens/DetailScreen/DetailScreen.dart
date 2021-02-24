@@ -178,7 +178,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
                                     child: Center(
-                                        child: Text("Add to Cart",
+                                        child: Text("Buy Now",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18,
