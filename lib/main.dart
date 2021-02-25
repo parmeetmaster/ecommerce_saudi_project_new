@@ -8,13 +8,16 @@ import 'package:flutter_app_demo_saudi/Provider/SignUpProvider.dart';
 import 'package:flutter_app_demo_saudi/Screens/AnalysisImageScreen/AnalysisDetailScreen.dart';
 import 'package:flutter_app_demo_saudi/Screens/DetailScreen/DetailScreen.dart';
 import 'package:flutter_app_demo_saudi/Screens/Firebasedemopack/FirebaseDemo.dart';
+import 'package:flutter_app_demo_saudi/Screens/Splash/splashscreen.dart';
 import 'package:provider/provider.dart';
 
+import 'Global/Global.dart';
 import 'Provider/AnalysisProvider.dart';
 import 'Provider/DetailsScreenProvider.dart';
 import 'Provider/HomeProvider.dart';
 import 'Provider/ProfileProvider.dart';
 import 'Provider/SignInProvider.dart';
+import 'Provider/SplashProvider.dart';
 import 'Screens/Home/HomeScreen.dart';
 import 'Screens/ImagePicker/ImagePickerScreen.dart';
 import 'Screens/SignInScreen/signin.dart';
@@ -22,14 +25,29 @@ import 'Screens/SignUp/signup.dart';
 import 'Screens/home1/home1.dart';
 import 'Screens/home2/home2.dart';
 import 'Screens/profile/ProfilePage.dart';
+import 'constantPackage/constStrings.dart';
+import 'model/UserModel.dart';
 import 'utils/preference.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Preference.load();
 
+  //check user is logged in or not
+  try{
+
+    String user_json_details= await Preference.getString(user_credentials);
+    Global.user_details=await userModelFromJson(user_json_details);
+    if(Global.user_details!=null){
+      print("take u home${Global.user_details.email}");
+    }else{
+    }
+
+  }catch(e){}
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (ctx) => SplashProvider()),
     ChangeNotifierProvider(create: (ctx) => HomeProvider()),
     ChangeNotifierProvider(create: (ctx) => FirebaseDemoProvider()),
     ChangeNotifierProvider(create: (ctx) => ProfileProvider()),
@@ -52,10 +70,11 @@ class MyApp extends StatelessWidget {
     getData();
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute:  SignUpScreen.classname,
+      initialRoute:  SplashScreen.classname,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         Home.classname: (context) => Home(),
+        SplashScreen.classname:(context)=>SplashScreen(),
         AnalysisImageScreen.classname:(context)=>AnalysisImageScreen(),
         ProfilePage.classname:(context)=>ProfilePage(),
         SignInPage.classname:(context)=>SignInPage(),

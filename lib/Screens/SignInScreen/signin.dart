@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Global/Global.dart';
 import 'package:flutter_app_demo_saudi/Provider/SignInProvider.dart';
+import 'package:flutter_app_demo_saudi/Screens/Home/HomeScreen.dart';
+import 'package:flutter_app_demo_saudi/Screens/SignUp/signup.dart';
 import 'package:flutter_app_demo_saudi/widgets/custom_shape.dart';
 import 'package:flutter_app_demo_saudi/widgets/responsive_ui.dart';
 import 'package:flutter_app_demo_saudi/widgets/textformfield.dart';
@@ -37,12 +40,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider=Provider.of<SignInProvider>(context).setContext(context);
+
     onsuccessNavigateHome(){
-      Navigator.popAndPushNamed(context, '/');
+      Navigator.popAndPushNamed(context, Home.classname);
     }
 
 
+
+   Provider.of<SignInProvider>(context).setOnsuccessSignIn(onsuccessNavigateHome);
 
      _height = MediaQuery.of(context).size.height;
      _width = MediaQuery.of(context).size.width;
@@ -257,8 +262,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           GestureDetector(
             onTap: () {
-           //   Navigator.of(context).pushNamed(SIGN_UP);
-              print("Routing to Sign up screen");
+       Navigator.pushNamed(context, SignUpScreen.classname);
             },
             child: Text(
               "Sign up",

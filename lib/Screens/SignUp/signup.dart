@@ -34,27 +34,25 @@ final provider=Provider.of<SignUpProvider>(context).setContext(context);
     _large =  ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
     _medium =  ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
 
-    return Material(
-      child: Scaffold(
-        key: Provider.of<SignUpProvider>(context).scaffoldkey,
-        body: Container(
-          height: _height,
-          width: _width,
-          margin: EdgeInsets.only(bottom: 5),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Opacity(opacity: 0.88,child: CustomAppBar()),
-                clipShape(),
-                form(),
-                acceptTermsTextRow(),
-                SizedBox(height: _height/35,),
-                button(),
-                infoTextRow(),
+    return Scaffold(
+      key: Provider.of<SignUpProvider>(context).scaffoldkey_signup,
+      body: Container(
+        height: _height,
+        width: _width,
+        margin: EdgeInsets.only(bottom: 5),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Opacity(opacity: 0.88,child: CustomAppBar()),
+              clipShape(),
+              form(),
+              acceptTermsTextRow(),
+              SizedBox(height: _height/35,),
+              button(),
+              infoTextRow(),
 
-                //signInTextRow(),
-              ],
-            ),
+              //signInTextRow(),
+            ],
           ),
         ),
       ),
