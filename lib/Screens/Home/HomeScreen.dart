@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Provider/DetailsScreenProvider.dart';
 import 'package:flutter_app_demo_saudi/Provider/HomeProvider.dart';
 import 'package:flutter_app_demo_saudi/Screens/ImagePicker/ImagePickerScreen.dart';
 import 'package:flutter_app_demo_saudi/widgets/my_app_bar.dart';
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // its used to reset upcoming screen
     final provider = Provider.of<HomeProvider>(context);
     provider.setContext(context);
     provider.initload();
@@ -78,8 +80,8 @@ class _HomeState extends State<Home> {
               label: 'Detect Product',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
+              icon: Icon(Icons.person),
+              label: 'Profile',
             ),
           ],
           currentIndex: value.currentIndex,

@@ -63,7 +63,7 @@ class RapidApiProductDetailApi {
         receiveTimeout: 300000,);
       dioservice.options.headers['x-rapidapi-key'] = '684e680847msh32ca30af9167cacp1a86a6jsn0df3e838aeeb';
       dioservice.options.headers["x-rapidapi-host"] = "amazon-products1.p.rapidapi.com";
-      dioservice.options.headers["useQueryString"] = "true";
+      dioservice.options.headers["useQueryString"] = true;
     }
     return dioservice;
   }
