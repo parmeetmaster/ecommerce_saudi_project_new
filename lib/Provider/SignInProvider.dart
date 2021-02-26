@@ -70,7 +70,7 @@ class SignInProvider extends ChangeNotifier {
             scaffoldkey.currentState.showSnackBar(SnackBar(content: Text("Log In Successful")));
             onsuccessNavigateHome();
           }else{
-            scaffoldkey.currentState.showSnackBar(SnackBar(content: Text("User Not Found")));
+            scaffoldkey.currentState.showSnackBar(SnackBar(content: Text("Credential Incorrect or User not Found")));
           }
         }
 

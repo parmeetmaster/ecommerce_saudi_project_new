@@ -35,6 +35,7 @@ class _DetailScreenState extends State<DetailScreen> {
     provider.isOnceLoaded = false;
     provider.model = null; // its used to reset upcoming screen
     provider.isOnceLoaded = false;
+    provider.resetfavicon();
     super.initState();
   }
 
@@ -44,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
 //final DetailScreenModel Results=DetailScreenModel(imgUrl: "",tag: "");
     final provider = Provider.of<DetailScreenProvider>(context);
     if (provider.isOnceLoaded == false) provider.loadProductDetails(args);
-
+provider.args=args;
     _expandBottom() {
       print("expand bottom called");
 
@@ -167,7 +168,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                       children: [
                                         Icon(Icons.remove_red_eye_rounded),
                                         SizedBox(height: 10),
-                                        Icon(Icons.favorite_border_rounded)
+                                        InkWell(
+                                            onTap: value.setfavourite,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: value.fav_icon,
+                                            ))
                                       ],
                                     ),
                                   ),

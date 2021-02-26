@@ -14,7 +14,7 @@ class SplashProvider extends ChangeNotifier{
 
 checkUserLoginStatus()async {
    try{
-
+//main classs  set this data
    if(Global.user_details!=null){
      Navigator.popAndPushNamed(context, Home.classname);
    }else{

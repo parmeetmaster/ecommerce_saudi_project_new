@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Global/Global.dart';
 import 'package:flutter_app_demo_saudi/Screens/DetailScreen/Components/curverdBox.dart';
 import 'package:flutter_app_demo_saudi/Screens/DetailScreen/Components/roundedCircle.dart';
 import 'package:flutter_app_demo_saudi/api/rapidApiProductDetailApi.dart';
@@ -29,6 +31,9 @@ class DetailScreenProvider extends ChangeNotifier {
   int cartcount = 0;
   bool isOnceLoaded = false;
   ProductDetailDescription model;
+  Icon fav_icon = Icon(Icons.favorite_border_rounded);
+  Results args;
+
   generateColorCircles() async {
     colorWidgets = [];
     int i = 0;
@@ -143,37 +148,103 @@ class DetailScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void buyItem()async {
-
-  String url=model.fullLink;
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
-      }
-
+  void buyItem() async {
+    String url = model.fullLink;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Future<void> loadProductDetails(Results args) async {
-
-    if(isOnceLoaded==true)
-      return;
-    isOnceLoaded=true;
+    if (isOnceLoaded == true) return;
+    isOnceLoaded = true;
     var queryParameters = {
       "asin": "${args.asin}",
       "country": "US",
     };
 
-    var header={"x-rapidapi-key":"684e680847msh32ca30af9167cacp1a86a6jsn0df3e838aeeb","x-rapidapi-host":"amazon-products1.p.rapidapi.com","useQueryString":"true"};
-    Response resp = await RapidApiProductDetailApi()
-        .getclient()
-        .get("/product", queryParameters: queryParameters,options: Options(headers: header));
+    var header = {
+      "x-rapidapi-key": "684e680847msh32ca30af9167cacp1a86a6jsn0df3e838aeeb",
+      "x-rapidapi-host": "amazon-products1.p.rapidapi.com",
+      "useQueryString": "true"
+    };
+    Response resp = await RapidApiProductDetailApi().getclient().get("/product",
+        queryParameters: queryParameters, options: Options(headers: header));
 
-   //this.model= ProductDetailDescription.fromJson(resp.data).;
-   this.model= new  ProductDetailDescription(description:resp.data["description"],fullLink:resp.data["full_link"] ) ;
-    print("full link is here${ resp.data["description"]}");
+    //this.model= ProductDetailDescription.fromJson(resp.data).;
+    this.model = new ProductDetailDescription(
+        description: resp.data["description"],
+        fullLink: resp.data["full_link"]);
+    print("full link is here${resp.data["description"]}");
 
-  notifyListeners();
+    notifyListeners();
+  }
+
+  Future<void> performUpdate() async {
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection("Favourite")
+        .where("email", isEqualTo: "${Global.user_details.email}")
+        .get();
+      int snapsize= snap.size;
+    if(snapsize>0){
+      String document = snap.docs[0].id;
+      print("document id is${document}");
+      List<dynamic> list_of_favourites=   snap.docs[0].get("favlist");
+
+      list_of_favourites.add(args.toJson());
+      // update instance
+
+      FirebaseFirestore.instance
+          .collection("Favourite")
+          .doc(document)
+          .update({"email": "${Global.user_details.email}",
+        "favlist":list_of_favourites
+      });
+
+    }
+    else if(snapsize<=0){
+       await FirebaseFirestore.instance
+          .collection("Favourite").add({"email":Global.user_details.email,"favlist":[args.toJson()]});
+
+    }
+
+    fav_icon = Icon(Icons.favorite);
+    notifyListeners();
+  }
+
+  setfavourite() {
+    FutureBuilder<void>(
+        future: performUpdate(),
+        builder: (context, snapshot) {
+          print('In Builder');
+        });
 
   }
+
+  void resetfavicon() {
+    fav_icon = Icon(Icons.favorite_border_rounded);
+  }
 }
+
+/*    if(snapsize>0){
+      String document = snap.docs[0].id;
+      print("document id is${document}");
+      List<dynamic> d=   snap.docs[0].get("favo");
+      print("single list is${d[0]}");
+      Results k=  Results.fromJson(d[0]);
+      print("asin is is${k.asin}");
+
+
+      // update instance
+      FirebaseFirestore.instance
+          .collection("Favourite")
+          .doc(document)
+          .update({"email": "parmeets834a@gmail.com",
+        "favo":[args.toJson(),args.toJson()]
+      });
+
+    }*/
+
+

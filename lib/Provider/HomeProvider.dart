@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo_saudi/Provider/AnalysisProvider.dart';
 import 'package:flutter_app_demo_saudi/Screens/AnalysisImageScreen/AnalysisDetailScreen.dart';
+import 'package:flutter_app_demo_saudi/Screens/profile/ProfilePage.dart';
 import 'package:flutter_app_demo_saudi/api/clarfieApiService.dart';
 import 'package:flutter_app_demo_saudi/api/rapidApiService.dart';
 import 'package:flutter_app_demo_saudi/model/AnalysisDataHolder.dart';
@@ -185,6 +186,9 @@ class HomeProvider extends ChangeNotifier {
     if (value == 1) {
       //  takeCameraPicture();
       showAlertDialog(context);
+    }
+    if(value==2){
+      Navigator.pushNamed(context,ProfilePage.classname);
     }
   }
 
