@@ -62,7 +62,7 @@ class AnalysisScreenProvider extends ChangeNotifier{
     for(String productname in listOfstring){
       listofProducts.add(InkWell(
           onTap: (){
-            Navigator.pushNamed(context, Home.classname,arguments: ClarfieToProductSearchCarrier(productname: productname));
+            Navigator.pushNamedAndRemoveUntil(context, Home.classname, (Route<dynamic> route) => false,arguments: ClarfieToProductSearchCarrier(productname: productname));
 
           },
           child: SimpleItem(text: productname,)));
