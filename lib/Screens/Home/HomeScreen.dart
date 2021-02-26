@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_demo_saudi/Provider/DetailsScreenProvider.dart';
 import 'package:flutter_app_demo_saudi/Provider/HomeProvider.dart';
 import 'package:flutter_app_demo_saudi/Screens/ImagePicker/ImagePickerScreen.dart';
+import 'package:flutter_app_demo_saudi/model/ClarfieToProductSearchCarrier.dart';
 import 'package:flutter_app_demo_saudi/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import '../Firebasedemopack/FirebaseDemo.dart';
@@ -16,11 +17,25 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool searchone; // use to handle search request comes from clarfie
+  @override
+  void initState() {
+   searchone=false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    // its used to reset upcoming screen
     final provider = Provider.of<HomeProvider>(context);
+    ClarfieToProductSearchCarrier model=ModalRoute.of(context).settings.arguments;
+
+    if(model!=null && searchone==false){
+      searchone=true;
+      provider.searchTextController.text=model.productname; // use to set value from clearfir
+      provider.search(model.productname); // use to perform search
+    }
+
+    // its used to reset upcoming screen
+
     provider.setContext(context);
     provider.initload();
     var size = MediaQuery.of(context).size;

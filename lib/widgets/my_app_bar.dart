@@ -77,6 +77,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: TextField(
+                  controller: value.searchTextController,
                   onSubmitted: value.search,
                   decoration: InputDecoration(
                     hintText: 'Search Your Product',

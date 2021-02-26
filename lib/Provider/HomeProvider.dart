@@ -30,6 +30,8 @@ class HomeProvider extends ChangeNotifier {
 
   var isloading=true;
 
+  TextEditingController searchTextController=new TextEditingController();
+
   initload() async {
     if (isinitloaded == false) {
       isinitloaded = true;

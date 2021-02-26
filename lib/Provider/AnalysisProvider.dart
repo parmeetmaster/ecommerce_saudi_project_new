@@ -5,8 +5,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Screens/Home/HomeScreen.dart';
 import 'package:flutter_app_demo_saudi/api/clarfieApiService.dart';
 import 'package:flutter_app_demo_saudi/model/ClarfiePhotoResponse.dart';
+import 'package:flutter_app_demo_saudi/model/ClarfieToProductSearchCarrier.dart';
 import 'package:flutter_app_demo_saudi/model/ClarfieUploadModel.dart';
 import 'package:flutter_app_demo_saudi/widgets/simple_item.dart';
 import 'package:image_picker/image_picker.dart';
@@ -57,7 +60,12 @@ class AnalysisScreenProvider extends ChangeNotifier{
     }
    listOfstring=listOfstring.toSet().toList();
     for(String productname in listOfstring){
-      listofProducts.add(SimpleItem(text: productname,));
+      listofProducts.add(InkWell(
+          onTap: (){
+            Navigator.pushNamed(context, Home.classname,arguments: ClarfieToProductSearchCarrier(productname: productname));
+
+          },
+          child: SimpleItem(text: productname,)));
     }
 
 return true;

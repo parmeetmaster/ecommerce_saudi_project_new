@@ -15,6 +15,7 @@ class _AnalysisImageScreenState extends State<AnalysisImageScreen> with RouteAwa
   @override
   Widget build(BuildContext context) {
     final provider=Provider.of<AnalysisScreenProvider>(context);
+    provider.setContext(context);
     AnalysisDataHolder args = ModalRoute.of(context).settings.arguments;
 
 
