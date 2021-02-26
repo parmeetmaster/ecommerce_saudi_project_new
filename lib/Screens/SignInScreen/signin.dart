@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
               welcomeTextRow(),
               signInTextRow(),
               form(),
-              forgetPassTextRow(),
+           //   forgetPassTextRow(),
               SizedBox(height: _height / 12),
               button(),
               signUpTextRow(),

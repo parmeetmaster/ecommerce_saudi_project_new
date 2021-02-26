@@ -40,7 +40,7 @@ class MapScreenState extends State<ProfilePage>
    String fullname = "";
  try{
    if (Global.user_details.lastname!=null) {
-     fullname = Global.user_details.firstname + Global.user_details.lastname;
+     fullname = Global.user_details.firstname + " "+Global.user_details.lastname;
    }else{
      fullname = Global.user_details.firstname ;
    }

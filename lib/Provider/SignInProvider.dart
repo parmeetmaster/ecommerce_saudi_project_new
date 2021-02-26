@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/Global/Global.dart';
 import 'package:flutter_app_demo_saudi/Screens/Home/HomeScreen.dart';
 import 'package:flutter_app_demo_saudi/constantPackage/constStrings.dart';
 import 'package:flutter_app_demo_saudi/model/UserModel.dart';
@@ -65,8 +66,9 @@ class SignInProvider extends ChangeNotifier {
           if(result.get("password").toString()==passwordController.text.trim()){
 
             print("Login SuccessFul");
-       UserModel model=    UserModel(firstname:result.get("firstname").toString(),email: result.get("email").toString(),password: result.get("password").toString(),phonenumber: result.get("phonenumber").toString() );
+             UserModel model=    UserModel(firstname:result.get("firstname").toString(),email: result.get("email").toString(),password: result.get("password").toString(),phonenumber: result.get("phonenumber").toString() );
           Preference.setString(user_credentials,userModelToJson(model));
+            Global.user_details=model;
             scaffoldkey.currentState.showSnackBar(SnackBar(content: Text("Log In Successful")));
             onsuccessNavigateHome();
           }else{
