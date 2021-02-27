@@ -69,6 +69,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+
       title: 'Flutter Demo',
       initialRoute:  SplashScreen.classname,
       routes: {

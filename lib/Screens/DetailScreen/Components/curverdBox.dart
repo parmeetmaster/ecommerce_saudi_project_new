@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo_saudi/constantPackage/constColors.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,13 +16,15 @@ class CurvedBox extends StatefulWidget {
 
 class _CurvedBoxState extends State<CurvedBox> {
 
+
+
   @override
   Widget build(BuildContext context) {
 
     return Container(
         height:50,width:50,
         child:Card(
-           color:widget.isActive ? Colors.pink[100] : Colors.white,
+           color:widget.isActive ? projorangelight: Colors.white,
           elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

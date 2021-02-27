@@ -51,7 +51,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 height: 15,
                 width: 15,
                 decoration:
-                    BoxDecoration(color: projpink, shape: BoxShape.circle),
+                    BoxDecoration(color: projorange, shape: BoxShape.circle),
                 child: Center(
                     child: Text(
                   "${widget.count}",

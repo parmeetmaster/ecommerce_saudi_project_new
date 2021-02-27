@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 
 const projblack = const Color(0xff333333);
-const projpink=const Color(0xffF8D9E0);
+const projorange=const Color(0xffFB9615);
+const projorangelight=const Color(0xffFB9615);
 const projgrey=const Color(0xff828282);
 const white=const Color(0xffffffff);
 const rounded_circle_active= const Color(0xff333333);
