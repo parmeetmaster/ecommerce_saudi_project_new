@@ -30,12 +30,12 @@ import 'model/UserModel.dart';
 import 'utils/preference.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await Preference.load();
+
 
   //check user is logged in or not
   try{
-
+    await Firebase.initializeApp();
+    await Preference.load();
     String user_json_details= await Preference.getString(user_credentials);
     Global.user_details=await userModelFromJson(user_json_details);
     if(Global.user_details!=null){

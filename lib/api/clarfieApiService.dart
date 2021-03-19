@@ -59,8 +59,8 @@ class ClarfieApiService {
 
       dioservice.options = new BaseOptions(
         baseUrl: clarfieApiLink,
-        connectTimeout: 300000,
-        receiveTimeout: 300000,);
+        connectTimeout: 20000,
+        receiveTimeout: 20000,);
       dioservice.options.headers['Authorization'] = "Bearer " + "0f8ff1a9b3b84092aed16545f36ac631";
 
     }
